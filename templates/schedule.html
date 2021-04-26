@@ -1,0 +1,192 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<script>
+
+function openform(a)
+{
+   if(a == 1)
+   {
+   
+   document.getElementById("deleteform").style.display = "block";
+   document.getElementById("editform").style.display = "none";
+   }
+   else
+   {
+   document.getElementById("editform").style.display = "block";
+   document.getElementById("deleteform").style.display = "none";
+   }
+}
+
+function etudeorlecture(sel)
+{
+if(sel.options[sel.selectedIndex].text == "Etude")
+	{
+	   document.getElementById("LecID").style.display = "none";
+	   document.getElementById("LecID").required = false;
+	   document.getElementById("EtdID").required = true;
+	   document.getElementById("EtdID").style.display = "inline";
+	   document.getElementById("LECLabel").style.display = "none";
+	   document.getElementById("ETDLabel").style.display = "inline";
+	}
+	else
+	{
+	   document.getElementById("LecID").required = true;
+	   document.getElementById("EtdID").required = false;
+	   document.getElementById("LecID").style.display = "inline";
+	   document.getElementById("EtdID").style.display = "none";
+	   document.getElementById("LECLabel").style.display = "inline";
+	   document.getElementById("ETDLabel").style.display = "none";
+	}
+}
+function etudeorlecture2(sel)
+{
+if(sel.options[sel.selectedIndex].text == "Etude")
+	{
+	   document.getElementById("etudtimeselect").style.display = "inline";
+	   document.getElementById("lecturetimeselect").style.display = "none";
+	    document.getElementById("etudeday").style.display = "inline";
+	   document.getElementById("lectureday").style.display = "none";
+	   document.getElementById("LecID2").style.display = "none";
+	   document.getElementById("LecID2").required = false;
+	   document.getElementById("EtdID2").required = true;
+	   document.getElementById("EtdID2").style.display = "inline";
+	   document.getElementById("LECLabel2").style.display = "none";
+	   document.getElementById("ETDLabel2").style.display = "inline";
+	}
+	else
+	{
+		document.getElementById("etudtimeselect").style.display = "none";
+	   document.getElementById("lecturetimeselect").style.display = "inline";
+	    document.getElementById("etudeday").style.display = "none";
+	   document.getElementById("lectureday").style.display = "inline";
+	   document.getElementById("LecID2").required = true;
+	   document.getElementById("EtdID2").required = false;
+	   document.getElementById("LecID2").style.display = "inline";
+	   document.getElementById("EtdID2").style.display = "none";
+	   document.getElementById("LECLabel2").style.display = "inline";
+	   document.getElementById("ETDLabel2").style.display = "none";
+	}
+	
+	
+	
+}
+
+function daytimee(sel)
+{
+     if(sel.options[sel.selectedIndex].text == "Friday")
+	 {
+	 document.getElementById("9:30").disabled = true;
+	 document.getElementById("11:30").disabled = true;
+	 document.getElementById("13:30").disabled= true;
+	 document.getElementById("15:30").disabled = true;
+	 }
+	 else{
+	 document.getElementById("9:30").style.display = false;
+	 document.getElementById("11:30").style.display = false;
+	 document.getElementById("13:30").style.display = false;
+	 document.getElementById("15:30").style.display = false;
+	 }
+
+
+}
+
+
+</script>
+<div class="container">
+    <a href="/lectures" class="button">Lectures</a>
+    <a href="/schedule" class="button">Weekly Schedule</a>
+	<a href="/etudes" class="button">Etudes</a>
+    <a href="/students" class="button">All Students</a>
+    <a href="/profile" class="button" style="float: right;">Profile</a>
+    <a href="/logout" class="button" style="float: right;">Log Out</a>
+</div>
+<div class="container">
+<input onclick="openform(1)" style="font-size:12px;" type="button" name="sub" value="Lecture or Etude Delete">
+
+{% if title == 'Teacher' %}<input onclick="openform(2)" style="font-size:12px;" type="button" name="sub" value="Update an Etude or Lecture">{% endif %}
+<form style="display: none;" action="/schedule" method="POST" name="edit" id="deleteform">
+<select onchange="etudeorlecture(this)" id="mySelect11" name = "lectureoretude">
+<option value="Monday">Etude</option>
+<option value="Tuesday">Lecture</option>
+</select>
+<label style="display: none;" id="LECLabel" for="act" >Lecture ID: </label>
+<input style="display: none;" type="number" id="LecID" type="text" name="LecID" value="" required><br>
+<label style="display: none;" id="ETDLabel" for="act" >Etude ID: </label>
+<input style="display: none;" type="number" id="EtdID" type="text" name="EtudeID" value="" required><br>
+<input onclick="return confirm('Are you sure?')" style="font-size:12px;" type="submit" name="sub" value="Delete">
+</form>
+{% if title == 'Teacher' %}
+<form style="display: none;" action="/schedule" method="POST" name="edit" id="editform">
+<select onchange="etudeorlecture2(this)" id="mySelect12" name = "lectureoretude">
+<option value="Monday">Etude</option>
+<option value="Tuesday" selected>Lecture</option>
+</select>
+<label  style="display: none;" id="LECLabel2" for="act" >Lecture ID: </label>
+<input style="display: none;" type="number" id="LecID2" type="text" name="LecID2" value="" required><br>
+<label  style="display: none;" id="ETDLabel2" for="act" >Etude ID: </label>
+<input style="display: none;" type="number" id="EtdID2" type="text" name="EtudeID2" value="" required><br>
+<label  id="actLabel" for="act" >Weekday: </label>
+<select id="lectureday" name = "wday">
+<option value="Monday">Monday</option>
+<option value="Tuesday">Tuesday</option>
+<option value="Wednesday">Wednesday</option>
+<option value="Thursday">Thursday</option>
+<option value="Friday">Friday</option>
+</select>
+<select style="display: none;" onchange="daytimee(this)" id="etudeday" name = "etudewday">
+<option value="Friday">Friday</option>
+<option value="Saturday" selected>Saturday</option>
+</select>
+<label  id="actLabel" for="act" >Quota: </label>
+<select id="mySelect1" name = "lquotaa">
+<option value="1">1</option>
+<option value="30">30</option>
+<option value="45">45</option>
+<option value="60">60</option>
+</select>
+<label  id="actLabel" for="act" >Time: </label>
+<select id="lecturetimeselect" name = "timee">
+<option value="9:30">9:30</option>
+<option value="11:30">11:30</option>
+<option value="13:30">13:30</option>
+<option value="15:30">15:30</option>
+</select>
+<select style="display: none;" id="etudtimeselect" name = "timee2">
+<option id ="9:30" value="9:30">9:30</option>
+<option id = "11:30" value="11:30">11:30</option>
+<option id ="13:30" value="13:30">13:30</option>
+<option id = "15:30" value="15:30">15:30</option>
+<option value="16:30" >16:30</option>
+<option value="17:30">17:30</option>
+</select>
+<label  id="actLabel" for="act" >Location: </label>
+<select id="mySelect1" name = "lcation">
+<option value="MED A34">MED A34</option>
+<option value="EHB 2101">EHB 2101</option>
+<option value="MDB A105">MDB A105</option>
+</select>
+<input onclick="return confirm('Are you sure?')" style="font-size:12px;" type="submit" name="sub" value="Update">
+</form>
+{% endif %}
+<form name="schedules" id="form1" enctype="multipart/form-data">
+    <table border=1 style="width:100%">
+        <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+			<th>Saturday</th>
+        </tr>
+        {{newrow | safe}}
+    </table>
+</form>
+
+
+
+</div>
+
+
+{% endblock %}

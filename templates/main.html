@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SchoolManager</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"/>
+    <link rel="stylesheet" href="/static/css/styles.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+<a href="/"><h1 class="title">SchoolManager</h1></a>
+
+{% if message %}
+<div class="notification is-info">{{ message }}</div>
+{% endif %}
+
+{% block content %}
+
+{% endblock %}
+
+<footer>
+    <p>
+        <strong>SchoolManager&trade;</strong>
+    </p>
+    <p>
+        <small>&copy; 2019-2020, burocknroll & furblood</small>
+    </p>
+</footer>
+</body>
+</html>

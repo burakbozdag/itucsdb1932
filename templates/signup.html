@@ -1,0 +1,96 @@
+{% extends "main.html" %}
+
+{% block content %}
+<script>
+function asd(a,b)
+{
+    if(a==1)
+	{
+		
+		if(b==0)
+		{
+			document.getElementById("signupform1").style.visibility="visible";
+			document.getElementById("subj").style.visibility="hidden";
+			document.getElementById("subjLabel").style.display="none";
+			document.getElementById("exp").style.visibility="hidden";
+			document.getElementById("expLabel").style.display="none";
+			document.getElementById("deg").style.visibility="visible";
+			document.getElementById("degLabel").style.display="inline";
+	        document.getElementById("exp").required = false;
+			document.getElementById("deg").required = true;
+			document.getElementById("3").checked = true;
+			document.getElementById("1").checked = false;
+			document.getElementById("2").checked = false;}
+		else if(b==1)
+		{
+			document.getElementById("signupform1").style.visibility="visible";
+			document.getElementById("subj").style.visibility="hidden";
+			document.getElementById("subjLabel").style.display="none";
+			document.getElementById("exp").style.visibility="visible";		
+	        document.getElementById("exp").required = true;
+			document.getElementById("deg").required = false;
+			document.getElementById("expLabel").style.display="inline";
+			document.getElementById("deg").style.visibility="hidden";
+			document.getElementById("degLabel").style.display="none";
+			document.getElementById("1").checked = true;
+			document.getElementById("2").checked = false;
+			document.getElementById("3").checked = false;}
+		else
+		{
+			document.getElementById("signupform1").style.visibility="visible";
+			document.getElementById("subj").style.visibility="visible";
+			document.getElementById("subjLabel").style.display="inline";
+			document.getElementById("exp").style.visibility="visible";
+	        document.getElementById("exp").required = true;
+			document.getElementById("deg").required = false;
+			document.getElementById("expLabel").style.display="inline";
+			document.getElementById("deg").style.visibility="hidden";
+			document.getElementById("degLabel").style.display="none";
+			document.getElementById("2").checked = true;
+			document.getElementById("1").checked = false;
+			document.getElementById("3").checked = false;}
+	}
+        
+    else
+	{
+	document.getElementById("signupform").style.display="hidden";
+	}
+        
+}
+
+
+</script>
+<div class="container">
+    <a href="/signin" class="button">Sign In</a><br><br>
+
+    <form id="signupform1" method="POST" action="/signup" >
+		<input id="1" onclick="asd(1,1)" type="radio" name="title" value="Manager">Manager<br>
+		<input id="2" onclick="asd(1,2)" type="radio" name="title" value="Teacher">Teacher<br>
+		<input id="3" onclick="asd(1,0)" type="radio" name="title" value="Student">Student<br>
+        Username: <input type="text" name="UserName" value="" required="required" ><br>
+
+        Password: <input type="password" name="Password" value="" required="required"><br>
+
+        First name: <input type="text" name="FirstName" value="" ><br>
+
+        Last name: <input type="text" name="LastName" value=""><br>
+
+		<label id="subjLabel" for="subj" style = "display:none;">Subject: </label>
+		<select id="subj" type="text" name="subject" value="" style = "visibility: hidden;">
+            <option value="Physics">Physics</option>
+			<option value="Biology">Biology</option>
+			<option value="Chemistry">Chemistry</option>
+        </select><br>
+        <input name="subject" id="subj" type="text" style = "visibility: hidden;" value=""><br>
+
+		<label  id="degLabel" for="deg" style = "display:none;">Degree: </label>
+        <input type="number" id="deg" type="text" name="Degree" value="" style = "visibility: hidden;"><br>
+
+		<label  id="expLabel" for="deg" style = "display:none;">Experience Year: </label>
+        <input type="number" id="exp" type="text" name="Experience" value="" style = "visibility: hidden;"><br>
+
+        <input style="font-size:12px;" type="submit" name="btn" value="Sign Up">
+    </form>
+</div>
+
+{% endblock %}
